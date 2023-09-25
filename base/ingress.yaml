@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: default
+  name: meilisearch-ingress
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/group.name: ttv-eks
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-2:230410870031:certificate/eb8c3eba-9992-49c4-9aec-e7aace831793
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+
+spec:
+  ingressClassName: alb
+  rules:
+    - host: "meilisearch.promosales.me"
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: app-meilisearch
+              port:
+                number: 7700
