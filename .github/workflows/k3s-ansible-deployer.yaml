@@ -10,8 +10,13 @@ jobs:
     - name: Update MeiliSearch Image
       run: |
         export MEILI_IMAGE_VERSION=${{ vars.MEILI_IMAGE_VERSION }}
+        export HOST_IP=${{ secrets.SSH_HOST }}
+
         envsubst < ./base/statefulset.yaml > ./base/statefulset_updated.yaml
         mv ./base/statefulset_updated.yaml ./base/statefulset.yaml
+
+        envsubst < ./ansible/hosts > ./ansible/hosts_updated
+        mv ./ansible/hosts_updated ./ansible/hosts
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -31,4 +36,4 @@ jobs:
       run: |
         echo "$PRIVATE_KEY" > private_key
         chmod 600 private_key
-        ansible-playbook -i "$HOST," -e "ansible_ssh_common_args='-o StrictHostKeyChecking=no'" -e "ansible_ssh_private_key_file=private_key" ./ansible/playbook.yml
+        ansible-playbook -i ./ansible/hosts -e "ansible_ssh_common_args='-o StrictHostKeyChecking=no'" -e "ansible_ssh_private_key_file=private_key" ./ansible/playbook.yml

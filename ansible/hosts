@@ -1,0 +1,2 @@
+[target_group]
+ansible_ssh_user="$HOST_IP"
