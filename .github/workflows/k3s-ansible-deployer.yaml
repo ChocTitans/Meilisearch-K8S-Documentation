@@ -1,4 +1,4 @@
-name: 
+name: Ansible to Ubuntu & K3S
 on:
   workflow_dispatch:
 jobs:

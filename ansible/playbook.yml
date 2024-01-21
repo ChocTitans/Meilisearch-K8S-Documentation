@@ -1,5 +1,7 @@
 ---
-- hosts: localhost
+- hosts: target_group
+  become: yes
+  become_user: root
   tasks:
     - name: Echo Hello, World!
       command: echo "Hello, World!"
