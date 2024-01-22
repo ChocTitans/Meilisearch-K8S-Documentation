@@ -4,7 +4,7 @@
   become_user: root
   tasks:
     - name: Install Kustomize
-      command: curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+      command: snap install kustomize
 
     - name: Apply Meilisearch Manifest File
       command: kustomize build . | kubectl apply -f -
