@@ -5,9 +5,6 @@
   tasks:
     - name: Install Kustomize
       command: curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
-      args:
-        chdir: /usr/local/bin
-      register: kustomize_install
 
     - name: Apply Meilisearch Manifest File
       command: kustomize build . | kubectl apply -f -
