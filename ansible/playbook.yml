@@ -6,5 +6,14 @@
     - name: Install Kustomize
       command: snap install kustomize
 
+    - name: Deploy manifests from GitHub
+      git:
+        repo: https://github.com/ChocTitans/Meilisearch-K8S-Documentation.
+        dest: /tmp/manifests
+        checkout: main
+      register: git_result
+
     - name: Apply Meilisearch Manifest File
-      command: kubectl apply -f ./base/service.yaml
+      kustomize:
+        path: /tmp/manifests
+      register: kustomize_result

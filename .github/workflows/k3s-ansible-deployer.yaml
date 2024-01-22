@@ -36,6 +36,7 @@ jobs:
         USERNAME: ${{ secrets.SSH_USER }}
         HOST: ${{ secrets.SSH_HOST }}
         KUBE_CONFIG_DATA: ${{ secrets.K3S_KUBECONFIG }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       working-directory: .
       run: |
         echo "$PRIVATE_KEY" > private_key
