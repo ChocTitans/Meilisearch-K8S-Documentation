@@ -39,3 +39,6 @@ jobs:
         echo "$PRIVATE_KEY" > private_key
         chmod 600 private_key
         ansible-playbook -i ./ansible/hosts -e "ansible_ssh_common_args='-o StrictHostKeyChecking=no'" -e "ansible_ssh_private_key_file=private_key ansible_ssh_pass=${{ secrets.SSH_PASSWORD }}" ./ansible/playbook.yml
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.K3S_KUBECONFIG }}
+      working-directory: .
