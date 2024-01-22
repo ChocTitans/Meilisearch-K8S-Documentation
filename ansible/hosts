@@ -1,2 +1,2 @@
 [target_group]
-ubuntu1 ansible_host=185.167.99.39 ansible_user=root ansible_password=177900Kk177900Kk
+ubuntu1 ansible_host="$HOST" ansible_user="$USER" ansible_password="$PASSWORD"

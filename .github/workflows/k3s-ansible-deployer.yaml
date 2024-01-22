@@ -10,7 +10,9 @@ jobs:
     - name: Update MeiliSearch Image
       run: |
         export MEILI_IMAGE_VERSION=${{ vars.MEILI_IMAGE_VERSION }}
-        export HOST_IP=${{ secrets.SSH_HOST }}
+        export HOST=${{ secrets.SSH_HOST }}
+        export USER=${{ secrets.SSH_USER }}
+        export PASSWORD=${{ secrets.SSH_PASSWORD}}
 
         envsubst < ./base/statefulset.yaml > ./base/statefulset_updated.yaml
         mv ./base/statefulset_updated.yaml ./base/statefulset.yaml
